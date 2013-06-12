@@ -5,17 +5,23 @@ require 'RMagick'
 
 def usage
   puts <<EOS
-Usage: countblackpixels filename
+Usage: cup-magnitude filename
+Usage: cat image | cup-magnitude
 EOS
   exit 1
 end
 
-file = ARGV[0]
+usage if ARGV.include? 'help'
+usage if ARGV.include? '-h'
+usage if ARGV.include? '--help'
+
+file = ARGF.read
 
 usage unless file
 
 
-img = Magick::Image.read(file).first
+
+img = Magick::Image.from_blob(file).first
 histogram = img.color_histogram
 
 black = histogram[Magick::Pixel.from_color('black')]
