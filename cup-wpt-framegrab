@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+require 'uri'
+require 'open-uri'
+require 'pry'
+
+uri = URI('http://www.webpagetest.org/')
+uri.path = '/xmlResult/130612_TE_1D76/'
+
+doc = Nokogiri::XML open(uri.to_s)
+
+images = doc.css('frame image').collect(&:content)
+
+curlspec = ""
+images.each do |url|
+  curlspec += <<EOS
+##
+url = #{url}
+-O
+
+EOS
+end
+
+`printf "#{curlspec}" | curl -K -`
