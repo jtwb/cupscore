@@ -1,0 +1,7 @@
+#!/bin/bash
+
+compare $1 $2 \
+  -compose Src \
+  -highlight-color Black \
+  -lowlight-color White \
+  -
