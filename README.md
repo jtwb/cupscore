@@ -7,7 +7,7 @@ CUP Score
 * `cup-compare` - render all changed pixels as black
 * `cup-magnitude` - return number of black pixels in image
 
-Uses webpagetest, cURL, Image Magick.
+Uses [webpagetest](http://www.webpagetest.org/), [cURL](http://curl.haxx.se/), [Image Magick](https://github.com/trevor/ImageMagick).
 
 Usage:
 ```sh
