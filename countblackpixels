@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+require 'RMagick'
+
+def usage
+  puts <<EOS
+Usage: countblackpixels filename
+EOS
+  exit 1
+end
+
+file = ARGV[0]
+
+usage unless file
+
+
+img = Magick::Image.read(file).first
+histogram = img.color_histogram
+
+black = histogram[Magick::Pixel.from_color('black')]
+black ||= 0;
+
+puts black
